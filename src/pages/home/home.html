@@ -1,18 +1,97 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
-  <ion-navbar>
+
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="home"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+<ion-content>
+  <div *ngIf="tickets" showWhen="core">
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <h1>Issue No</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Short Desc</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Status</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Project</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Assigned To</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Priority</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Category</h1>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngFor="let ticket of tickets" #item>
+        <ion-row>
+          <ion-col>
+            <h3>{{ticket.id}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.shortDesc}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.status}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.project}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.assignedTo}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.priority}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{ticket.category}} </h3>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div *ngIf="tickets" showWhen="ios,android">
+    <ion-item *ngFor="let ticket of tickets" #item>
+      <ion-row>
+        <ion-col>Issue No: {{ticket.id}} </ion-col>
+        <ion-col>Assigned To: {{ticket.assignedTo}} </ion-col>
+        <ion-col>Status: {{ticket.status}} </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Short Desc: {{ticket.shortDesc}} </ion-col>
+        <ion-col>Project : {{ticket.project}} </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+  <div [hidden]="tickets || errMess">
+    <ion-spinner></ion-spinner>
+    <h3>Loading . . . Please Wait</h3>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h3>{{ errMess }}</h3>
+  </div>
 </ion-content>
