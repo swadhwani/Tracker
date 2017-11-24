@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 /**
  * Generated class for the CreateTicketPage page.
@@ -8,7 +8,6 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-create-ticket',
   templateUrl: 'create-ticket.html',

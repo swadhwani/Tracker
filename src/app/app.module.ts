@@ -16,6 +16,8 @@ import { TicketProvider } from '../providers/ticket/ticket';
 import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
 
 import { baseURL } from '../shared/baseurl';
+import { ProjectProvider } from '../providers/project/project';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { baseURL } from '../shared/baseurl';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TicketProvider,
     ProcessHttpmsgProvider, 
-    { provide: 'BaseURL', useValue: baseURL }
+    { provide: 'BaseURL', useValue: baseURL },
+    ProjectProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

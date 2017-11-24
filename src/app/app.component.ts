@@ -26,8 +26,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage }, 
       { title: 'Create Ticket',icon: 'clipboard',  component: CreateTicketPage }, 
-      { title: 'Add User',icon: 'person-add',  component: AddUserPage },
-      { title: 'Add Project',icon: 'briefcase',  component: AddProjectPage },
+      { title: 'Users',icon: 'person-add',  component: AddUserPage },
+      { title: 'Projects',icon: 'briefcase',  component: AddProjectPage },
       { title: 'User Settings',icon: 'settings',  component: UserSettingsPage }
     ];
 

@@ -18,7 +18,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="addTicket" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addTicket" (ngSubmit)="onSubmit()" style="vertical-align:middle">
     <ion-item>
       <ion-label>Project</ion-label>
       <ion-select formControlName="project">
@@ -35,29 +35,39 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label></ion-label>
-      <ion-select formControlName="assignedTo">
-        <ion-option value="swadhwani">Swaroop Wadhwani</ion-option>
-        <ion-option value="cgreen">Connie Green</ion-option>
-        <ion-option value="mharris">Marcel Harris</ion-option>
+      <ion-label>Category</ion-label>
+      <ion-select formControlName="category">
+        <ion-option value="bug">Bug</ion-option>
+        <ion-option value="info">Information</ion-option>
+        <ion-option value="ticket">Ticket</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Assigned To</ion-label>
-      <ion-select formControlName="assignedTo">
-        <ion-option value="swadhwani">Swaroop Wadhwani</ion-option>
-        <ion-option value="cgreen">Connie Green</ion-option>
-        <ion-option value="mharris">Marcel Harris</ion-option>
+      <ion-label>Priority</ion-label>
+      <ion-select formControlName="priority">
+        <ion-option value="low" default>Low</ion-option>
+        <ion-option value="medium">Medium</ion-option>
+        <ion-option value="high">High</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Assigned To</ion-label>
-      <ion-select formControlName="assignedTo">
-        <ion-option value="swadhwani">Swaroop Wadhwani</ion-option>
-        <ion-option value="cgreen">Connie Green</ion-option>
-        <ion-option value="mharris">Marcel Harris</ion-option>
+      <ion-label>Status</ion-label>
+      <ion-select formControlName="status">
+        <ion-option value="New">New</ion-option>
+        <ion-option value="In Process">In Process</ion-option>
+        <ion-option value="Closed">Closed</ion-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-label floating>Subject</ion-label>
+      <ion-input type="text" formControlName="shortDesc"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Comment</ion-label>
+        <ion-textarea type="text" formControlName="comments" rows="6"></ion-textarea>
+      </ion-item>
+
+      <button ion-button type="submit" [disabled]="!addTicket.valid">Submit</button>
   </form>
 
 

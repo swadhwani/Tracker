@@ -6,13 +6,119 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>addUser</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="addUser"></ion-icon>
+    </button>
+    <ion-title>Users</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div *ngIf="users" showWhen="core">
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <h1> User Name</h1>
+          </ion-col>
+          <ion-col>
+            <h1> First Name</h1>
+          </ion-col>
+          <ion-col>
+            <h1> Last Name</h1>
+          </ion-col>
+          <ion-col>
+            <h1> Email</h1>
+          </ion-col>
+          <ion-col>
+            <h1> Projects Assigned</h1>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngFor="let user of users" #item>
+        <ion-row>
+          <ion-col>
+            <h3>{{user.username}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3>{{user.firstname}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3>{{user.lastname}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3>{{user.email}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3>
+              <div *ngFor="let project of user.projects" #item>{{project.name}} </div>
+            </h3>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div [hidden]="users || errMess">
+    <ion-spinner></ion-spinner>
+    <h3>Loading . . . Please Wait</h3>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h3>{{ errMess }}</h3>
+  </div>
+
+  <div>
+    <h1 style="vertical-align:middle">Add a User</h1>
+    <form [formGroup]="addUser" (ngSubmit)="onSubmit()" style="vertical-align: middle">
+      <ion-item>
+        <ion-label floating> Username </ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating> Password </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating> First Name </ion-label>
+        <ion-input type="text" formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating> Last Name </ion-label>
+        <ion-input type="text" formControlName="lastname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating> Email </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <section>
+        <ion-item>
+          <ion-label> Projects </ion-label>
+          <ion-select formArrayName="projects"  *ngFor="let item of addUser.controls.projects.controls; let i=index">
+              <ion-option value="OSI Mac EP">OSI MAC EP</ion-option>
+              <ion-option value="Sysmex RF">Sysmex RF</ion-option>
+          </ion-select>
+          <ion-icon item-right name="ios-remove-circle-outline" (click)="onRemoveProject(i)"></ion-icon>
+          <!--<button type="button" title="Remove Project" (click)="onRemoveProject(i)">Remove</button>-->
+        </ion-item>
+       <!-- <div formArrayName="projects">
+            <div *ngFor="let item of addUser.controls.projects.controls; let i=index">
+              <ion-select>
+                  <ion-option value="OSI Mac EP">OSI MAC EP</ion-option>
+                  <ion-option value="Sysmex RF">Sysmex RF</ion-option>
+              </ion-select>
+              <button type="button" title="Remove Project" (click)="onRemoveProject(i)">Remove</button>
+            </div>
+          </div> -->
+      
+        <button type="button" (click)="onAddProject()">
+            Add Project
+          </button>
+        </section>
+    </form>
+
+  </div>
 
 </ion-content>

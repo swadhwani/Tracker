@@ -6,13 +6,54 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>addProject</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="briefcase"></ion-icon>
+    </button>
+    <ion-title>Projects</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div *ngIf="projects" showWhen="core">
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <h1>Project Name</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Default User</h1>
+          </ion-col>
+          <ion-col>
+            <h1>Members</h1>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngFor="let project of projects" #item>
+        <ion-row>
+          <ion-col>
+            <h3> {{project.name}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> {{project.defaultUser}} </h3>
+          </ion-col>
+          <ion-col>
+            <h3> <div *ngFor = "let member of project.members" #item > {{member.username}} </div> </h3>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div [hidden]="projects || errMess">
+      <ion-spinner></ion-spinner>
+      <h3>Loading . . . Please Wait</h3>
+    </div>
+    <div *ngIf="errMess">
+      <h2>Error</h2>
+      <h3>{{ errMess }}</h3>
+    </div>
 
 </ion-content>

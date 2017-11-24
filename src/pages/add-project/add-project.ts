@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit, Inject } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { Project } from '../../shared/project';
+import { ProjectProvider } from '../../providers/project/project';
 
 /**
  * Generated class for the AddProjectPage page.
@@ -8,18 +10,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add-project',
   templateUrl: 'add-project.html',
 })
-export class AddProjectPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class AddProjectPage implements OnInit {
+  projects:Project[];
+  errMess: string;
+  constructor(public navCtrl: NavController, private projectService: ProjectProvider, @Inject('BaseURL') private BaseURL) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddProjectPage');
-  }
+ ngOnInit() {
+  this.projectService.getProjects()
+  .subscribe(projects=> this.projects = projects, 
+    errmess => this.errMess = <any>errmess);
+ }
 
 }
